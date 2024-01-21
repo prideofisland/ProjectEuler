@@ -1,0 +1,46 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Jan 21 18:32:51 2024
+
+@author: pride
+"""
+
+def is_leap_year(year):
+    if year % 4 == 0:
+        if year % 100 == 0:
+            if year % 400 == 0:
+                return True
+            else:
+                return False
+        else:
+            return True
+    else:
+        return False
+
+def count_sundays_on_first_of_month():
+    # Initialize variables
+    day_of_week = 2  # January 1, 1901 was a Tuesday (0 - Monday, 1 - Tuesday, ..., 6 - Sunday)
+    count_sundays = 0
+
+    # Iterate through the years and months
+    for year in range(1901, 2001):
+        for month in range(1, 13):
+            # Check if the first day of the month is a Sunday
+            if day_of_week == 6:
+                count_sundays += 1
+
+            # Update day_of_week for the next month
+            if month in [1, 3, 5, 7, 8, 10, 12]:
+                day_of_week = (day_of_week + 3) % 7
+            elif month == 2:
+                if is_leap_year(year):
+                    day_of_week = (day_of_week + 1) % 7
+                else:
+                    day_of_week = day_of_week % 7
+            else:
+                day_of_week = (day_of_week + 2) % 7
+
+    return count_sundays
+
+result = count_sundays_on_first_of_month()
+print("Number of Sundays falling on the first of the month during the twentieth century:", result)
