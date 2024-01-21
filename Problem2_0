@@ -1,0 +1,8 @@
+def fib(limit):
+    a=1;
+    b=2;
+    for i in range(1,limit):
+        yield a
+        a,b=b,a+b
+#100 is the number of fibonacci terms (it's assumed - not calculated)
+print(sum([i for i in fib(100) if ((i % 2 == 0) and (i <= 4000000)) ]))
